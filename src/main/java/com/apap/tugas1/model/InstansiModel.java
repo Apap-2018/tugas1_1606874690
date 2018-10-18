@@ -1,6 +1,8 @@
 package com.apap.tugas1.model;
 
 import java.io.Serializable;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -89,5 +91,5 @@ public class InstansiModel implements Serializable {
 		this.listPegawai = listPegawai;
 	}
 	
-	
 }
+

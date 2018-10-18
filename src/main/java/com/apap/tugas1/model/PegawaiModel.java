@@ -29,7 +29,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "pegawai")
-public class PegawaiModel implements Serializable {
+public class PegawaiModel implements Serializable, Comparable<PegawaiModel> {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -149,6 +149,11 @@ public class PegawaiModel implements Serializable {
 		
 		return gaji;
 	}
+	
+	@Override
+	public int compareTo(PegawaiModel a) { 
+		return this.tanggalLahir.compareTo(a.getTanggalLahir()); 
+	} 
 
 }
 
@@ -158,4 +163,3 @@ class sortGajiPokok implements Comparator<JabatanModel> {
 		return (int) (a.getGajiPokok() - b.getGajiPokok()); 
 	} 
 } 
-

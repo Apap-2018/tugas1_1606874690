@@ -16,6 +16,7 @@
 		</div>
 		<div class="row">
 				<div class="col-md-6">
+				
 					<div class="card">
 						<div class="card-header">
 							Lihat Data Pegawai berdasarkan NIP
@@ -30,6 +31,7 @@
 							</form>							
 						</div>
 					</div>
+					
 					<div class="card">
 						<div class="card-header">
 							Lihat Detail Jabatan
@@ -37,7 +39,6 @@
 						<div class="card-body">
 							<form th:action="@{/jabatan/view}" method="GET">
 								<div class="card-body">
-									<label for="JabatanNama">Pilih Jabatan</label>
 									<br>
 									<select th:value="${listJabatan}" name = "idJabatan" required="required">
 	  									<option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"> </option>		  
@@ -49,6 +50,26 @@
 							</form>							
 						</div>
 					</div>
+					
+					<div class="card">
+						<div class="card-header">
+							Lihat Pegawai Termuda dan Tertua
+						</div>
+						<div class="card-body">
+							<form th:action="@{/pegawai/termuda-tertua}" method="GET">
+								<div class="card-body">
+									<br>
+									<select th:value="${listInstansi}" name = "idInstansi" required="required">
+	  									<option th:each="instansi : ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"> </option>		  
+									</select>
+									<br>
+									<br>
+									<button type="submit" class="btn btn-ptimary">Lihat</button>
+								</div>
+							</form>							
+						</div>
+					</div>
+					
 				</div>
 			</div>
 		

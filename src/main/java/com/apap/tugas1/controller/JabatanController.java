@@ -11,15 +11,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.apap.tugas1.model.InstansiModel;
 import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
+import com.apap.tugas1.repository.InstansiDb;
 import com.apap.tugas1.repository.JabatanDb;
 import com.apap.tugas1.repository.PegawaiDb;
+import com.apap.tugas1.service.InstansiService;
 import com.apap.tugas1.service.JabatanService;
 import com.apap.tugas1.service.PegawaiService;
 
 @Controller
 public class JabatanController {
+
+	private long idSementara;
 
 	@Autowired
 	JabatanService jabatanService;
@@ -27,15 +32,22 @@ public class JabatanController {
 	@Autowired
 	PegawaiService pegawaiService;
 	
+	@Autowired
+	InstansiService instansiService;
+	
 	@RequestMapping("/")
 	private String home(Model model) {
 		
 		JabatanDb jabatanDb = jabatanService.getJabatanDb();
 		List<JabatanModel> listJabatan = jabatanDb.findAll();
 
+		InstansiDb instansiDb = instansiService.getInstansiDb();
+		List<InstansiModel> listInstansi = instansiDb.findAll();
+		
 		model.addAttribute("title", "Home");
 		model.addAttribute("listJabatan", listJabatan);
-		
+		model.addAttribute("listInstansi", listInstansi);
+
 		return "home";
 	}
 	
@@ -97,6 +109,30 @@ public class JabatanController {
 		model.addAttribute("listJabatan", listJabatan);
 		model.addAttribute("title", "Lihat Semua Jabatan");
 		return "viewall-jabatan";	
+	}
+	
+	@RequestMapping(value= "/jabatan/ubah/{idJabatan}", method = RequestMethod.GET)
+	private String update(@PathVariable ("idJabatan") String idJabatan, Model model) {
+
+		JabatanModel jabatanArchive = jabatanService.getJabatanDetailById(Long.parseLong(idJabatan));
+
+		this.idSementara = Long.parseLong(idJabatan);
+		jabatanArchive.setId(idSementara);
+		model.addAttribute("jabatanArchive", jabatanArchive);
+		model.addAttribute("jabatan", new JabatanModel());
+		model.addAttribute("title", "Ubah Data Jabatan");
+		
+		return "update-jabatan";			
+	}
+	
+	@RequestMapping(value= "/jabatan/ubah", method = RequestMethod.POST)
+	private String updateJabatanSubmit(@ModelAttribute JabatanModel jabatan, Model model) {
+
+		jabatan.setId(idSementara);
+		jabatanService.updateJabatan(jabatan);
+		model.addAttribute("title", "Ubah Data Jabatan");
+		
+		return "update-success";
 	}
 	
 }

@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+	<head>
+		<object th:include="fragments/fragment :: title" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+		<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	</head>
+	
+	<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+	
+	<div class="container">
+	  <div class="row">
+	    <div class="col">
+	     	<h3 th:text="'Data Pegawai Termuda'"></h3>
+			<p th:text="'NIP: ' + ${termuda.nip}"></p>
+			<p th:text="'Nama: ' + ${termuda.nama}"></p>
+			<p th:text="'Tempat Lahir: ' + ${termuda.tempatLahir}"></p>
+			<p th:text="'Tanggal Lahir: ' + ${termuda.tanggalLahir}"></p>
+			<p th:text="'Tahun Masuk: ' + ${termuda.tahunMasuk}"></p>
+			<p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
+			<!-- <p th:text="'Gaji: Rp' + ${gajiTermuda}"></p> -->
+				<table>
+				<thead>
+					<tr>
+						<th>Jabatan</th>
+					</tr>
+					<tr th:each="jabatan, iterationStatus : *{listJabatanTermuda}">
+						<td th:text="${iterationStatus.count}"></td>
+						<td th:text="${jabatan.nama}"></td>
+					</tr> 
+			</table>
+	    </div>
+	    <div class="col">
+	   		<h3 th:text="'Data Pegawai Tertua'"></h3>
+			<p th:text="'NIP: ' + ${tertua.nip}"></p>
+			<p th:text="'Nama: ' + ${tertua.nama}"></p>
+			<p th:text="'Tempat Lahir: ' + ${tertua.tempatLahir}"></p>
+			<p th:text="'Tanggal Lahir: ' + ${tertua.tanggalLahir}"></p>
+			<p th:text="'Tahun Masuk: ' + ${tertua.tahunMasuk}"></p>
+			<p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
+			<!-- <p th:text="'Gaji: Rp' + ${gajiTertua}"></p> -->
+				<table>
+				<thead>
+					<tr>
+						<th>Jabatan</th>
+					</tr>
+					<tr th:each="jabatan, iterationStatus : *{listJabatanTertua}">
+						<td th:text="${iterationStatus.count}"></td>
+						<td th:text="${jabatan.nama}"></td>
+					</tr> 
+			</table>
+	    </div>
+	  </div>
+	</div>
+  
+  </body>
+</html>

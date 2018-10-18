@@ -2,8 +2,11 @@ package com.apap.tugas1.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
@@ -69,6 +72,37 @@ public class PegawaiController {
 		model.addAttribute("title", "Data Pegawai");
 		
 		return "view-pegawai";
+	}
+	
+
+	@RequestMapping(value= "/pegawai/termuda-tertua", method = RequestMethod.GET)
+	private String viewTermudaTertua(@RequestParam ("idInstansi") String idInstansi, Model model) {
+		
+		InstansiModel instansi = instansiService.getInstansiDetailById(Long.parseLong(idInstansi));
+		
+		List<PegawaiModel> listPegawai = instansi.getListPegawai();
+		//Collections.sort(listPegawai, new sortPegawai());
+		Collections.sort(listPegawai);
+		
+		PegawaiModel termuda = listPegawai.get(listPegawai.size()-1);
+		PegawaiModel tertua = listPegawai.get(0);
+		
+//		double gajiTermuda = termuda.hitungGaji();
+//		double gajiTertua = tertua.hitungGaji();
+		
+		List<JabatanModel> listJabatanTermuda = termuda.getJabatanPegawai();
+		List<JabatanModel> listJabatanTertua = tertua.getJabatanPegawai();
+		
+		model.addAttribute("termuda", termuda);
+		model.addAttribute("tertua", tertua);
+//		model.addAttribute("gajiTermuda", gajiTermuda);
+//		model.addAttribute("gajiTertua", gajiTertua);
+		model.addAttribute("instansi", instansi);
+		model.addAttribute("listJabatanTermuda", listJabatanTermuda);
+		model.addAttribute("listJabatanTertua", listJabatanTertua);
+		model.addAttribute("title", "Lihat Pegawai Termuda dan Tertua");
+
+		return "view-tertuatermuda";
 	}
 	
 	@InitBinder

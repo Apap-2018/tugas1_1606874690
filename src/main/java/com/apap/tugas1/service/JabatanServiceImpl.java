@@ -60,6 +60,21 @@ public class JabatanServiceImpl implements JabatanService{
 	}
 	
 	@Override
+	public void updateJabatan(JabatanModel jabatan) {
+		for (int i = 0; i < jabatanDb.findAll().size(); i++) {
+			if (jabatanDb.findAll().get(i).getId() == (jabatan.getId())) {
+				
+				JabatanModel archive = jabatanDb.findAll().get(i);
+				int idx = jabatanDb.findAll().indexOf(archive);
+				
+				jabatanDb.findAll().get(idx).setNama(jabatan.getNama());
+				jabatanDb.findAll().get(idx).setDeskripsi(jabatan.getDeskripsi());
+				jabatanDb.findAll().get(idx).setGajiPokok(jabatan.getGajiPokok());				
+			}
+		}
+	}
+	
+	@Override
 	public JabatanModel getJabatanDetailByNama(String nama) {
 		return jabatanDb.findByNama(nama);
 	}

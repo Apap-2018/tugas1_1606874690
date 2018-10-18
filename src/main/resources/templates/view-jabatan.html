@@ -14,9 +14,13 @@
 		<p th:text="'Nama: ' + ${jabatan.nama}"></p>
 		<p th:text="'Deskripsi: ' + ${jabatan.deskripsi}"></p>
 		<p th:text="'Gaji Pokok: ' + ${jabatan.gajiPokok}"></p>
-		<a href="#" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Ubah</a>
+		
+		<form th:action="@{/jabatan/ubah/} + ${jabatan.id}" th:object="${jabatan}">
+			<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit">Ubah</button>
+		</form>	
+			
 		<form th:action="@{/jabatan/hapus/} + ${jabatan.id}" th:object="${jabatan}" method="POST">
-		<button class="btn btn-danger btn-lg active" role="button" aria-pressed="true" type="submit">Hapus</button>
+			<button class="btn btn-danger btn-lg active" role="button" aria-pressed="true" type="submit">Hapus</button>
 		</form>
 	</body>
 	

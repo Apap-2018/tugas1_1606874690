@@ -11,60 +11,25 @@
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 	
 	<h3 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h3>
-		<p th:text="'NIP: ' + ${pegawai.nip}"></p>
-		<p th:text="'Nama: ' + ${pegawai.nama}"></p>
-		<p th:text="'Tempat Lahir: ' + ${pegawai.tempatLahir}"></p>
-		<p th:text="'Tanggal Lahir: ' + ${pegawai.tanggalLahir}"></p>
-		<p th:text="'Tahun Masuk: ' + ${pegawai.tahunMasuk}"></p>
-		<p th:text="'Nama Instansi: ' + ${instansi.nama}"></p>
-		<p th:text="'Gaji: Rp' + ${gaji}"></p>
-	 	<table>
-	 	<thead>
-				<tr>
-					<th>Jabatan</th>
-				</tr>
-				<tr th:each="jabatan, iterationStatus : *{listJabatan}">
-					<td th:text="${iterationStatus.count}"></td>
-					<td th:text="${jabatan.nama}"></td>
-				</tr> 
-		</table>
-		<!-- <form th:action="@{/dealer/delete/} + ${dealer.id}">
-			<input type="hidden" name="dealerId" th:value="${dealer.id}">
-			<button type="submit"> Hapus Dealer</button>
-		</form>-->
-		<br>
-	<!-- <form th:action="@{/car/delete}" th:object="${dealer}" method="POST">
-			<table>
-				<thead>
-				<tr>
-					<th>No.</th>
-					<th>Brand</th>
-					<th>Type</th>
-					<th>Price</th>
-					<th>Amount</th>
-					<th>Aksi</th>
-				</tr>
-				</thead>
-				<tbody>
-					<tr th:each="car,iterationStatus : *{listCar}">
-						<td th:text="${iterationStatus.count}"> </td>
-						<td th:text="${car.brand}"> </td>
-						<td th:text="${car.type}"> </td>
-						<td th:text="${car.price} >= 1000000000 ? 'Diatas 1M' : 'Dibawah 1M'"> </td>
-						<td th:text="${car.amount}"> </td>
-						<td>
-							<input type="checkbox" th:field="*{listCar}" th:value="${car.id}"/>
-							<label th:for="${#ids.prev('listCar')}">Hapus</label>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-			<button type="submit">Hapus yang dipilih</button>
-		</form>
-		<br>
-		<form th:action="@{/car/add/} + ${dealer.id}">
-			<button type="submit">Tambah Mobil</button>
-		</form> -->
+	<p th:text="'NIP: ' + ${pegawai.nip}"></p>
+	<p th:text="'Nama: ' + ${pegawai.nama}"></p>
+	<p th:text="'Tempat Lahir: ' + ${pegawai.tempatLahir}"></p>
+	<p th:text="'Tanggal Lahir: ' + ${pegawai.tanggalLahir}"></p>
+	<p th:text="'Tahun Masuk: ' + ${pegawai.tahunMasuk}"></p>
+	<p th:text="'Nama Instansi: ' + ${instansi.nama}"></p>
+	<p th:text="'Gaji: Rp' + ${gaji}"></p>
+ 	<table>
+ 	<thead>
+			<tr>
+				<th>Jabatan</th>
+			</tr>
+			<tr th:each="jabatan, iterationStatus : *{listJabatan}">
+				<td th:text="${iterationStatus.count}"></td>
+				<td th:text="${jabatan.nama}"></td>
+			</tr> 
+	</table>
+	<br>
+
 	</body>
 	
 </html>
