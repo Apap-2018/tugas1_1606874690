@@ -19,7 +19,7 @@ public interface PegawaiService {
 	String generateNip(long instansiId, String tanggalLahirString, String tahunMasuk, Date tanggalLahir, InstansiModel instansi);
 	void addPegawai(PegawaiModel pegawai);
 	void deletePegawai(PegawaiModel pegawai);
-	void updatePegawai(PegawaiModel pegawai);
+	void updatePegawai(PegawaiModel pegawai, String nipLama);
 	
 	PegawaiDb getPegawaiDb();
 }

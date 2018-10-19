@@ -36,6 +36,8 @@ import com.apap.tugas1.service.ProvinsiService;
 @Controller
 public class PegawaiController {
 
+	private String nipSementara;
+
 	@Autowired
 	private PegawaiService pegawaiService;
 	
@@ -162,7 +164,7 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping(value="/pegawai/tambah", method = RequestMethod.POST, params= {"tambahbaris"})
-	public String addRow(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
+	public String addRowTambah(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
 		
 		pegawai.getJabatanPegawai().add(new JabatanModel());
 		
@@ -185,7 +187,7 @@ public class PegawaiController {
 	}
 	
 	@RequestMapping(value="/pegawai/tambah", method = RequestMethod.POST, params={"hapusbaris"})
-	public String removeRow(@ModelAttribute PegawaiModel pegawai, final BindingResult bindingResult, final HttpServletRequest req, Model model) {
+	public String removeRowTambah(@ModelAttribute PegawaiModel pegawai, final BindingResult bindingResult, final HttpServletRequest req, Model model) {
 	  
 		final Integer rowId = Integer.valueOf(req.getParameter("hapusbaris"));
 		pegawai.getJabatanPegawai().remove(rowId.intValue());
@@ -207,5 +209,96 @@ public class PegawaiController {
 		model.addAttribute("title", "Tambah Pegawai");
 
 	    return "add-pegawai";
+	}
+	
+	@RequestMapping(value= "/pegawai/ubah", method = RequestMethod.GET)
+	private String update(@RequestParam (value = "nip") String nip, Model model) {
+
+		PegawaiModel pegawai = pegawaiService.getPegawaiDetailByNip(nip);
+		this.nipSementara = nip;
+
+//		List<JabatanModel> jabatanPegawai = new ArrayList<JabatanModel>();
+//		pegawai.setJabatanPegawai(jabatanPegawai);
+//		pegawai.getJabatanPegawai().add(new JabatanModel());
+//		
+//		InstansiModel instansi = new InstansiModel();
+//		pegawai.setInstansi(instansi);
+				
+		ProvinsiDb provinsiDb = provinsiService.getProvinsiDb();
+		List<ProvinsiModel> listProvinsi = provinsiDb.findAll();
+		model.addAttribute("listProvinsi", listProvinsi);
+
+		InstansiDb instansiDb = instansiService.getInstansiDb();
+		List<InstansiModel> listInstansi = instansiDb.findAll();
+		model.addAttribute("listInstansi", listInstansi);
+
+		JabatanDb jabatanDb = jabatanService.getJabatanDb();
+		List<JabatanModel> listJabatan = jabatanDb.findAll();
+		model.addAttribute("listJabatan", listJabatan);
+
+		model.addAttribute("pegawai", pegawai);
+		//model.addAttribute("instansi", instansi);
+		model.addAttribute("title", "Ubah Data Pegawai");
+
+		return "update-pegawai";				
+	}
+	
+	@RequestMapping(value="/pegawai/ubah", method = RequestMethod.POST, params= {"tambahbaris"})
+	public String addRowUbah(@ModelAttribute PegawaiModel pegawai, BindingResult bindingResult, Model model) {
+		
+		pegawai.getJabatanPegawai().add(new JabatanModel());
+		
+		ProvinsiDb provinsiDb = provinsiService.getProvinsiDb();
+		List<ProvinsiModel> listProvinsi = provinsiDb.findAll();
+		
+		InstansiDb instansiDb = instansiService.getInstansiDb();
+		List<InstansiModel> listInstansi = instansiDb.findAll();
+		
+		JabatanDb jabatanDb = jabatanService.getJabatanDb();
+		List<JabatanModel> listJabatan = jabatanDb.findAll();
+		
+		model.addAttribute("listJabatan", listJabatan);
+		model.addAttribute("listProvinsi", listProvinsi);
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("pegawai", pegawai);
+		model.addAttribute("title", "Ubah Data Pegawai");
+
+		return "update-pegawai";	
+	}
+	
+	@RequestMapping(value="/pegawai/ubah", method = RequestMethod.POST, params={"hapusbaris"})
+	public String removeRowUbah(@ModelAttribute PegawaiModel pegawai, final BindingResult bindingResult, final HttpServletRequest req, Model model) {
+	  
+		final Integer rowId = Integer.valueOf(req.getParameter("hapusbaris"));
+		pegawai.getJabatanPegawai().remove(rowId.intValue());
+	    
+		ProvinsiDb provinsiDb = provinsiService.getProvinsiDb();
+		List<ProvinsiModel> listProvinsi = provinsiDb.findAll();
+		
+		InstansiDb instansiDb = instansiService.getInstansiDb();
+		List<InstansiModel> listInstansi = instansiDb.findAll();
+		
+		JabatanDb jabatanDb = jabatanService.getJabatanDb();
+		List<JabatanModel> listJabatan = jabatanDb.findAll();
+		
+		
+		model.addAttribute("listJabatan", listJabatan);
+		model.addAttribute("listProvinsi", listProvinsi);
+		model.addAttribute("listInstansi", listInstansi);
+		model.addAttribute("pegawai", pegawai);
+		model.addAttribute("title", "Ubah Data Pegawai");
+
+	    return "update-pegawai";
+	}
+	
+	@RequestMapping(value= "/pegawai/ubah", method = RequestMethod.POST, params= {"simpan"})
+	private String updateJabatanSubmit(@ModelAttribute PegawaiModel pegawai, Model model) {
+
+		pegawai.setNip(nipSementara);
+		pegawaiService.updatePegawai(pegawai, nipSementara);
+		model.addAttribute("title", "Ubah Data Pegawai");
+		model.addAttribute("nip", nipSementara);
+
+		return "update-pegawai-success";
 	}
 }

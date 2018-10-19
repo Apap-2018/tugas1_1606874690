@@ -1,5 +1,6 @@
 package com.apap.tugas1.service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.apap.tugas1.model.InstansiModel;
+import com.apap.tugas1.model.JabatanModel;
 import com.apap.tugas1.model.PegawaiModel;
 import com.apap.tugas1.repository.PegawaiDb;
 
@@ -79,7 +81,69 @@ public class PegawaiServiceImpl implements PegawaiService{
 	}
 	
 	@Override
-	public void updatePegawai(PegawaiModel pegawai) {
+	public void updatePegawai(PegawaiModel pegawai, String nipLama) {
 		
+		PegawaiModel pegawaiLama = pegawaiDb.findByNip(nipLama);
+		int idx = pegawaiDb.findAll().indexOf(pegawaiLama);
+		
+		String nipBaru = "";
+		
+		SimpleDateFormat date = new SimpleDateFormat("dd-MM-yy");
+		String tanggalLahirString = date.format(pegawai.getTanggalLahir());
+		tanggalLahirString = tanggalLahirString.replace("-", "");
+		String instansiIdString = Long.toString(pegawai.getInstansi().getId());
+		String urutanPegawaiStringSatuan = "0";
+		String urutanPegawaiStringPuluhan = "";
+		int urutanPegawai = 0;
+		
+		
+		List<PegawaiModel> listSameDateYearIn = pegawaiDb.findByInstansiAndTanggalLahirAndTahunMasuk(pegawai.getInstansi(), pegawai.getTanggalLahir(), pegawai.getTahunMasuk());
+	
+		if (listSameDateYearIn.isEmpty()) {
+			urutanPegawai += 1;
+		} else {
+			urutanPegawai = listSameDateYearIn.size() + 1;
+		}
+		
+		if (Integer.toString(urutanPegawai).length() == 1) {
+			urutanPegawaiStringSatuan += Integer.toString(urutanPegawai);
+			nipBaru = instansiIdString + tanggalLahirString + pegawai.getTahunMasuk() + urutanPegawaiStringSatuan;
+		} else {
+			urutanPegawaiStringPuluhan += Integer.toString(urutanPegawai);
+			nipBaru = instansiIdString + tanggalLahirString + pegawai.getTahunMasuk() + urutanPegawaiStringPuluhan;
+		}
+		
+		pegawaiDb.findAll().get(idx).setNama(pegawai.getNama());
+		pegawaiDb.findAll().get(idx).setTempatLahir(pegawai.getTempatLahir());
+		pegawaiDb.findAll().get(idx).setTanggalLahir(pegawai.getTanggalLahir());
+		pegawaiDb.findAll().get(idx).setTahunMasuk(pegawai.getTahunMasuk());
+		pegawaiDb.findAll().get(idx).setInstansi(pegawai.getInstansi());
+		pegawaiDb.findAll().get(idx).setJabatanPegawai(pegawai.getJabatanPegawai());
+		pegawaiDb.findAll().get(idx).setNip(nipBaru);
+		
+//		for (int i = 0; i < pegawaiDb.findAll().size(); i++) {
+//			if (pegawaiDb.findAll().get(i).getNip() == (pegawai.getNip())) {
+//				
+//				PegawaiModel archive = pegawaiDb.findAll().get(i);
+//				int idx = pegawaiDb.findAll().indexOf(archive);
+//				
+//				pegawaiDb.findAll().get(idx).setNama(pegawai.getNama());
+//				pegawaiDb.findAll().get(idx).setTempatLahir(pegawai.getTempatLahir());
+//				pegawaiDb.findAll().get(idx).setTanggalLahir(pegawai.getTanggalLahir());
+//				pegawaiDb.findAll().get(idx).setTahunMasuk(pegawai.getTahunMasuk());
+//				pegawaiDb.findAll().get(idx).setInstansi(pegawai.getInstansi());
+//				pegawaiDb.findAll().get(idx).setJabatanPegawai(pegawai.getJabatanPegawai());
+//				
+//				SimpleDateFormat date = new SimpleDateFormat("dd-MM-yy");
+//				String tanggalLahirString = date.format(pegawai.getTanggalLahir());
+//				tanggalLahirString = tanggalLahirString.replace("-", "");
+				
+//				String newNip = this.generateNip(pegawai.getInstansi().getId(), tanggalLahirString, pegawai.getTahunMasuk(), 
+//						pegawai.getTanggalLahir(), pegawai.getInstansi());
+//				
+//				pegawaiDb.findAll().get(idx).setNip(newNip);
+//				break;
+//			}
+//		}
 	}
 }

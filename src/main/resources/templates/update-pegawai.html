@@ -10,10 +10,10 @@
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
 
-	<h2>Tambah Pegawai</h2>
+	<h2>Ubah Data Pegawai</h2>
 
-	<form th:action="@{/pegawai/tambah}" th:object="${pegawai}" method="POST">
-		<input type="hidden" name="nip"/ > 
+	<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="POST">
+		<input type="hidden" name="nip" th:value="${pegawai.nip}"/ > 
 		
 		<div class="form-group">
 		Nama: <br> <input
