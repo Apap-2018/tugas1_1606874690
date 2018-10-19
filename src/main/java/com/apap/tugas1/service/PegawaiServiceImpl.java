@@ -1,6 +1,7 @@
 package com.apap.tugas1.service;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -39,6 +40,21 @@ public class PegawaiServiceImpl implements PegawaiService{
 	@Override
 	public List<PegawaiModel> findByInstansiAndTanggalLahirAndTahunMasuk(InstansiModel instansi, Date tanggalLahir, String tahunMasuk) {
 		return pegawaiDb.findByInstansiAndTanggalLahirAndTahunMasuk(instansi, tanggalLahir, tahunMasuk);
+	}
+	
+	@Override
+	public List<PegawaiModel> findByInstansiAndJabatanPegawai(InstansiModel instansi, JabatanModel jabatanPegawai) {
+		 
+		List<PegawaiModel> listPegawaiByInstansiAndJabatanPegawai = new ArrayList<>();
+		List<PegawaiModel> listPegawaiByInstansi = pegawaiDb.findByInstansi(instansi);
+		
+		for (int i = 0; i < listPegawaiByInstansi.size(); i++) {
+			if (listPegawaiByInstansi.get(i).getJabatanPegawai().contains(jabatanPegawai)) {
+				listPegawaiByInstansiAndJabatanPegawai.add(listPegawaiByInstansi.get(i));
+			}
+		}
+		
+		return listPegawaiByInstansiAndJabatanPegawai;
 	}
 
 	@Override
@@ -121,29 +137,5 @@ public class PegawaiServiceImpl implements PegawaiService{
 		pegawaiDb.findAll().get(idx).setJabatanPegawai(pegawai.getJabatanPegawai());
 		pegawaiDb.findAll().get(idx).setNip(nipBaru);
 		
-//		for (int i = 0; i < pegawaiDb.findAll().size(); i++) {
-//			if (pegawaiDb.findAll().get(i).getNip() == (pegawai.getNip())) {
-//				
-//				PegawaiModel archive = pegawaiDb.findAll().get(i);
-//				int idx = pegawaiDb.findAll().indexOf(archive);
-//				
-//				pegawaiDb.findAll().get(idx).setNama(pegawai.getNama());
-//				pegawaiDb.findAll().get(idx).setTempatLahir(pegawai.getTempatLahir());
-//				pegawaiDb.findAll().get(idx).setTanggalLahir(pegawai.getTanggalLahir());
-//				pegawaiDb.findAll().get(idx).setTahunMasuk(pegawai.getTahunMasuk());
-//				pegawaiDb.findAll().get(idx).setInstansi(pegawai.getInstansi());
-//				pegawaiDb.findAll().get(idx).setJabatanPegawai(pegawai.getJabatanPegawai());
-//				
-//				SimpleDateFormat date = new SimpleDateFormat("dd-MM-yy");
-//				String tanggalLahirString = date.format(pegawai.getTanggalLahir());
-//				tanggalLahirString = tanggalLahirString.replace("-", "");
-				
-//				String newNip = this.generateNip(pegawai.getInstansi().getId(), tanggalLahirString, pegawai.getTahunMasuk(), 
-//						pegawai.getTanggalLahir(), pegawai.getInstansi());
-//				
-//				pegawaiDb.findAll().get(idx).setNip(newNip);
-//				break;
-//			}
-//		}
 	}
 }

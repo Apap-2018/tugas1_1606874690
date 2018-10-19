@@ -27,6 +27,4 @@ public class InstansiServiceImpl implements InstansiService {
 		return instansiDb.findById(id);
 	}
 	
-
-
 }

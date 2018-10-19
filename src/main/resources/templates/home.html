@@ -41,6 +41,7 @@
 								<div class="card-body">
 									<br>
 									<select th:value="${listJabatan}" name = "idJabatan" required="required">
+										<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
 	  									<option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"> </option>		  
 									</select>
 									<br>
@@ -60,6 +61,7 @@
 								<div class="card-body">
 									<br>
 									<select th:value="${listInstansi}" name = "idInstansi" required="required">
+										<option disabled="disabled" selected="selected" >Pilih Instansi</option>
 	  									<option th:each="instansi : ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"> </option>		  
 									</select>
 									<br>

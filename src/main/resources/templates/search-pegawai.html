@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<object th:include="fragments/fragment :: title" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: css" th:remove="tag"></object>
+	<object th:include="fragments/fragment :: js" th:remove="tag"></object>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script type="text/javascript" charset="utf8" src="	https://code.jquery.com/jquery-3.3.1.js"></script>
+	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+</head>
+
+<body>
+	<nav th:replace="fragments/fragment :: navbar"></nav>
+
+	<h2>Cari Pegawai</h2>
+
+	<form th:action="@{/pegawai/cari}" th:object="${pegawai}" method="GET">
+
+		<div class="form-group">
+			Provinsi:<br> 
+			<select
+				th:value="${listProvinsi}" name="idProvinsi" id="provinsi" required="required">
+				<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
+				<option th:each="provinsi : ${listProvinsi}"
+					th:value="${provinsi.id}"
+					th:text="${provinsi.nama}">
+				</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+			Instansi:<br> 
+			<select th:value="${listInstansi}" name="idInstansi"
+				id="instansi" required="required">
+				<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
+				<option th:each="instansi : ${listInstansi}"
+					th:value="${instansi.id}"
+					th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}">Pilih Instansi</option>
+			</select>
+		</div>
+
+		<div class="form-group">
+		Jabatan: <br>
+			<select th:value="${listJabatan}" name = "idJabatan" required="required">
+				<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
+	  			<option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"> </option>		  
+			</select>
+		</div>
+		
+		<button class="btn btn-primary btn-lg active" role="button"
+			aria-pressed="true" type="submit">Cari</button>
+	</form>
+	
+	<hr>
+	
+	<table id="table_id" class="display">
+		    <thead>
+		        <tr>
+		        	<th>NIP</th>
+			        <th>Nama</th>
+			        <th>Tempat Lahir</th>
+			        <th>Tanggal Lahir</th>
+			        <th>Tahun Masuk</th>
+			        <th>Nama Instansi</th>
+			        <th>Jabatan</th>
+		        </tr>
+		    </thead>
+		    <tbody>
+		        <tr th:each="pegawai : ${listPegawai}">
+					<td><p th:text="${pegawai.nip}"></p></td>
+					<td><p th:text="${pegawai.nama}"></p></td>
+					<td><p th:text="${pegawai.tempatLahir}"></p></td>
+					<td><p th:text="${pegawai.tanggalLahir}"></p></td>
+					<td><p th:text="${pegawai.tahunMasuk}"></p></td>
+					<td><p th:text="${pegawai.instansi.nama} + ' - ' + ${pegawai.instansi.provinsi.nama} "></p></td>
+					<td>
+						<ol>
+							<li th:each="jabatan: ${pegawai.jabatanPegawai}" th:text="${jabatan.nama}"></li>
+						</ol>
+					</td>
+				</tr>
+		    </tbody>
+		</table>
+			
+		
+	<!-- Source: https://stackoverflow.com/questions/43848339/dynamic-dropdowns-using-thymeleaf-spring-boot -->
+	<script>
+	$(document).ready( function () {
+	    $('#table_id').DataTable();
+	} );
+
+	$('#provinsi').change(
+	        function() {
+	            $.getJSON("http://localhost:8080/provinsi/instansi", {
+	                idProvinsi : $(this).val(),
+	                ajax : 'true'
+	            }, function(data) {
+	                var html = '<option value="">Pilih Instansi</option>';
+	                var len = data.length;
+	                for ( var i = 0; i < len; i++) {
+	                    html += '<option value="' + data[i].id + '">'
+	                            + data[i].nama + '</option>';
+	                }
+	                html += '</option>';
+	                $('#instansi').html(html);
+	            });
+	        });
+	</script>
+
+</body>
+
+</html>

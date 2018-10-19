@@ -143,8 +143,8 @@ public class PegawaiModel implements Serializable, Comparable<PegawaiModel> {
 		Collections.sort(jabatan, new sortGajiPokok());
 		gajiPokok = jabatan.get(jabatan.size()-1).getGajiPokok();
 		
-		//gaji = gaji pokok + (%tunjangan provinsi x gaji pokok)
-		//kalo dua jabatan, gaji pokok = gaji pokok yg lebih besar
+		//Gaji = Gaji Pokok + (Presentase Tunjangan Provinsi x Gaji Pokok)
+		//Jika memiliki dua jabatan, Gaji Pokok adalah jabatan dengan gaji pokok yang lebih besar
 		gaji = gajiPokok + ((instansi.getProvinsi().getPresentaseTunjangan() / 100) * gajiPokok);
 		
 		return gaji;
