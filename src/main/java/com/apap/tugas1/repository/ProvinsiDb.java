@@ -5,5 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.apap.tugas1.model.ProvinsiModel;
 
 public interface ProvinsiDb extends JpaRepository<ProvinsiModel, Long> {
-
+	ProvinsiModel findById(long id);
 }
