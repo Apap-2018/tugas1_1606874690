@@ -60,6 +60,29 @@ public class JabatanServiceImpl implements JabatanService{
 	}
 	
 	@Override
+	public int hitungPegawai(JabatanModel jabatan, List<PegawaiModel> listPegawai) {
+		int jumlahPegawai = 0;
+		
+		for (int i = 0; i < listPegawai.size(); i++) {
+			if (listPegawai.get(i).getJabatanPegawai().size() > 1) {
+				for (int j = 0; j < listPegawai.get(i).getJabatanPegawai().size(); j++) {
+					if (listPegawai.get(i).getJabatanPegawai().get(j).getNama().equalsIgnoreCase(jabatan.getNama())) {
+						jumlahPegawai += 1;
+					}
+				}
+				
+			} else {
+				if (listPegawai.get(i).getJabatanPegawai().get(0).getNama().equalsIgnoreCase(jabatan.getNama())) {
+					jumlahPegawai += 1;
+				}
+			}
+			
+		}
+		
+		return jumlahPegawai;
+	}
+	
+	@Override
 	public void updateJabatan(JabatanModel jabatan) {
 		for (int i = 0; i < jabatanDb.findAll().size(); i++) {
 			if (jabatanDb.findAll().get(i).getId() == (jabatan.getId())) {

@@ -12,6 +12,7 @@ public interface JabatanService {
 	void deleteJabatan(JabatanModel jabatan);
 	void updateJabatan(JabatanModel dealer);
 	boolean cekIsiPegawai(JabatanModel jabatan, List<PegawaiModel> listPegawai);
+	int hitungPegawai(JabatanModel jabatan, List<PegawaiModel> listPegawai);
 	JabatanModel getJabatanDetailByNama(String nama);
 	JabatanModel getJabatanDetailById(long id);
 }

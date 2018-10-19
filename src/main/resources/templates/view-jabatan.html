@@ -14,8 +14,11 @@
 		<p th:text="'Nama: ' + ${jabatan.nama}"></p>
 		<p th:text="'Deskripsi: ' + ${jabatan.deskripsi}"></p>
 		<p th:text="'Gaji Pokok: ' + ${jabatan.gajiPokok}"></p>
+		<p th:text="'Jumlah Pegawai: ' + ${jumlahPegawai}"></p>
 		
-		<form th:action="@{/jabatan/ubah/} + ${jabatan.id}" th:object="${jabatan}">
+		
+		<form th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="GET">
+			<input type="hidden" th:value="${jabatan.id}" name="idJabatan" /> 
 			<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit">Ubah</button>
 		</form>	
 			

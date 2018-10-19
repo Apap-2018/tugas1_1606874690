@@ -92,9 +92,15 @@ public class JabatanController {
 	@RequestMapping(value= "/jabatan/view", method = RequestMethod.GET)
 	private String viewJabatan(@RequestParam ("idJabatan") String idJabatan,  Model model) {
 		
+		PegawaiDb pegawaiDb = pegawaiService.getPegawaiDb();
+		List<PegawaiModel> listPegawai = pegawaiDb.findAll();
+		
 		JabatanModel jabatan = jabatanService.getJabatanDetailById(Long.parseLong(idJabatan));
 		
+		int jumlahPegawai = jabatanService.hitungPegawai(jabatan, listPegawai);
+
 		model.addAttribute("jabatan", jabatan);
+		model.addAttribute("jumlahPegawai", jumlahPegawai);
 		model.addAttribute("title", "Detail Jabatan");
 
 		return "view-jabatan";
@@ -111,8 +117,8 @@ public class JabatanController {
 		return "viewall-jabatan";	
 	}
 	
-	@RequestMapping(value= "/jabatan/ubah/{idJabatan}", method = RequestMethod.GET)
-	private String update(@PathVariable ("idJabatan") String idJabatan, Model model) {
+	@RequestMapping(value= "/jabatan/ubah", method = RequestMethod.GET)
+	private String update(@RequestParam (value = "idJabatan") String idJabatan, Model model) {
 
 		JabatanModel jabatanArchive = jabatanService.getJabatanDetailById(Long.parseLong(idJabatan));
 
