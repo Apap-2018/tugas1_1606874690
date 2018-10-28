@@ -20,7 +20,7 @@
 		<div class="form-group">
 			Provinsi:<br> 
 			<select
-				th:value="${listProvinsi}" name="idProvinsi" id="provinsi" required="required">
+				th:value="${listProvinsi}" name="idProvinsi" id="provinsi">
 				<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
 				<option th:each="provinsi : ${listProvinsi}"
 					th:value="${provinsi.id}"
@@ -31,9 +31,8 @@
 
 		<div class="form-group">
 			Instansi:<br> 
-			<select th:value="${listInstansi}" name="idInstansi"
-				id="instansi" required="required">
-				<option disabled="disabled" selected="selected" >Pilih Provinsi</option>
+			<select th:value="${listInstansi}" name="idInstansi" >
+				<option disabled="disabled" selected="selected" >Pilih Instansi</option>
 				<option th:each="instansi : ${listInstansi}"
 					th:value="${instansi.id}"
 					th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}">Pilih Instansi</option>
@@ -42,7 +41,7 @@
 
 		<div class="form-group">
 		Jabatan: <br>
-			<select th:value="${listJabatan}" name = "idJabatan" required="required">
+			<select th:value="${listJabatan}" name = "idJabatan">
 				<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
 	  			<option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"> </option>		  
 			</select>

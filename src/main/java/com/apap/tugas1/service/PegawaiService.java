@@ -15,7 +15,8 @@ public interface PegawaiService {
 	PegawaiModel getPegawaiDetailByNip(String nip);
 	List<PegawaiModel> findByInstansiAndTanggalLahirAndTahunMasuk(InstansiModel instansi, Date tanggalLahir, String tahunMasuk);
 	List<PegawaiModel> findByInstansiAndJabatanPegawai(InstansiModel instansi, JabatanModel jabatanPegawai);
-
+	List<PegawaiModel> findByJabatanPegawai(List<JabatanModel> jabatanPegawai);
+	
 	String generateNip(long instansiId, String tanggalLahirString, String tahunMasuk, Date tanggalLahir, InstansiModel instansi);
 	void addPegawai(PegawaiModel pegawai);
 	void deletePegawai(PegawaiModel pegawai);
