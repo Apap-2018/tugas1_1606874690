@@ -12,10 +12,10 @@
 
 <body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
-
-	<h2>Cari Pegawai</h2>
-
-	<form th:action="@{/pegawai/cari}" th:object="${pegawai}" method="GET">
+	<br>
+	<h2 style="margin-left:10px">Cari Pegawai</h2>
+	<hr>
+	<form th:action="@{/pegawai/cari}" th:object="${pegawai}" method="GET" style="margin-left:10px">
 
 		<div class="form-group">
 			Provinsi:<br> 
@@ -52,8 +52,8 @@
 	</form>
 	
 	<hr>
-	
-	<table id="table_id" class="display">
+	<div style="margin-left:10px; margin-right:10px; margin-bottom:10px">
+	<table id="table_id" class="display" >
 		    <thead>
 		        <tr>
 		        	<th>NIP</th>
@@ -81,7 +81,7 @@
 				</tr>
 		    </tbody>
 		</table>
-			
+		</div>
 		
 	<!-- Source: https://stackoverflow.com/questions/43848339/dynamic-dropdowns-using-thymeleaf-spring-boot -->
 	<script>

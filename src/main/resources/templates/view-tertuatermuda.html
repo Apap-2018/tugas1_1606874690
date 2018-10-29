@@ -14,41 +14,43 @@
 	<div class="container">
 	  <div class="row">
 	    <div class="col">
+	    	<br>
 	     	<h3 th:text="'Data Pegawai Termuda'"></h3>
-			<p th:text="'NIP: ' + ${termuda.nip}"></p>
-			<p th:text="'Nama: ' + ${termuda.nama}"></p>
-			<p th:text="'Tempat Lahir: ' + ${termuda.tempatLahir}"></p>
-			<p th:text="'Tanggal Lahir: ' + ${termuda.tanggalLahir}"></p>
-			<p th:text="'Tahun Masuk: ' + ${termuda.tahunMasuk}"></p>
-			<p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
+	     	<hr>
+			<b>NIP: </b><p th:text="${termuda.nip}"></p>
+			<b>Nama: </b><p th:text="${termuda.nama}"></p>
+			<b>Tempat Lahir: </b><p th:text="${termuda.tempatLahir}"></p>
+			<b>Tanggal Lahir: </b><p th:text="${termuda.tanggalLahir}"></p>
+			<b>Tahun Masuk: </b><p th:text="${termuda.tahunMasuk}"></p>
+			<b>Nama Instansi: </b><p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
 				<table>
 				<thead>
 					<tr>
-						<th>Jabatan</th>
+						<th>Jabatan: </th>
 					</tr>
-					<tr th:each="jabatan, iterationStatus : *{listJabatanTermuda}">
-						<td th:text="${iterationStatus.count}"></td>
-						<td th:text="${jabatan.nama}"></td>
-					</tr> 
+					<tr>
+						<td><li th:each="jabatan: *{listJabatanTermuda}" th:text="${jabatan.nama}"></li></td>
+					</tr>
 			</table>
 	    </div>
 	    <div class="col">
+	    	<br>
 	   		<h3 th:text="'Data Pegawai Tertua'"></h3>
-			<p th:text="'NIP: ' + ${tertua.nip}"></p>
-			<p th:text="'Nama: ' + ${tertua.nama}"></p>
-			<p th:text="'Tempat Lahir: ' + ${tertua.tempatLahir}"></p>
-			<p th:text="'Tanggal Lahir: ' + ${tertua.tanggalLahir}"></p>
-			<p th:text="'Tahun Masuk: ' + ${tertua.tahunMasuk}"></p>
-			<p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
+	   		<hr>
+			<b>NIP: </b><p th:text="${tertua.nip}"></p>
+			<b>Nama: </b><p th:text="${tertua.nama}"></p>
+			<b>Tempat Lahir: </b><p th:text="${tertua.tempatLahir}"></p>
+			<b>Tanggal Lahir: </b><p th:text="${tertua.tanggalLahir}"></p>
+			<b>Tahun Masuk: </b><p th:text="${tertua.tahunMasuk}"></p>
+			<b>Nama Instansi: </b><p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
 				<table>
 				<thead>
 					<tr>
 						<th>Jabatan</th>
 					</tr>
-					<tr th:each="jabatan, iterationStatus : *{listJabatanTertua}">
-						<td th:text="${iterationStatus.count}"></td>
-						<td th:text="${jabatan.nama}"></td>
-					</tr> 
+					<tr>
+						<td><li th:each="jabatan: *{listJabatanTertua}" th:text="${jabatan.nama}"></li></td>
+					</tr>
 			</table>
 	    </div>
 	  </div>

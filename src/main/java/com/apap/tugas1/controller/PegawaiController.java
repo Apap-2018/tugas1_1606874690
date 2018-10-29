@@ -99,7 +99,7 @@ public class PegawaiController {
 			@RequestParam (value = "idInstansi", required = false) String idInstansi,
 			@RequestParam (value = "idJabatan", required = false) String idJabatan, Model model) {
 		
-		//filter by provinsi, instansi, jabatan DONE
+		//filter by provinsi, instansi, jabatan 
 		if (idProvinsi != null && idInstansi != null && idJabatan != null) {
 			
 			InstansiModel instansi = instansiService.getInstansiDetailById(Long.parseLong(idInstansi));
@@ -108,7 +108,7 @@ public class PegawaiController {
 			
 			model.addAttribute("listPegawai", listPegawai);
 
-		//filter by provinsi DONE
+		//filter by provinsi 
 		} else if (idProvinsi != null && idInstansi == null && idJabatan == null) {
 			
 			ProvinsiModel provinsi = provinsiService.getProvinsiDetailById(Long.parseLong(idProvinsi));
@@ -118,7 +118,7 @@ public class PegawaiController {
 			
 			model.addAttribute("listPegawai", listPegawai);
 			
-		//filter by provinsi, instansi DONE
+		//filter by provinsi, instansi 
 		} else if (idProvinsi != null && idInstansi != null && idJabatan == null) {
 			
 			InstansiModel instansi = instansiService.getInstansiDetailById(Long.parseLong(idInstansi));
@@ -126,7 +126,7 @@ public class PegawaiController {
 			
 			model.addAttribute("listPegawai", listPegawai);
 			
-		//filter by jabatan DONE
+		//filter by jabatan 
 		} else if (idProvinsi == null && idInstansi == null && idJabatan != null) {
 			
 			JabatanModel jabatan = jabatanService.getJabatanDetailById(Long.parseLong(idJabatan));
@@ -137,7 +137,7 @@ public class PegawaiController {
 			
 			model.addAttribute("listPegawai", listPegawai);
 			
-		//filter by provinsi, jabatan DONE
+		//filter by provinsi, jabatan 
 		} else if (idProvinsi != null && idInstansi == null && idJabatan != null) {
 			
 			JabatanModel jabatan = jabatanService.getJabatanDetailById(Long.parseLong(idJabatan));
@@ -151,7 +151,7 @@ public class PegawaiController {
 
 			model.addAttribute("listPegawai", listPegawai);
 		
-		//filter by instansi DONE
+		//filter by instansi
 		} else if (idProvinsi == null && idInstansi != null && idJabatan == null) {
 		
 			InstansiModel instansi = instansiService.getInstansiDetailById(Long.parseLong(idInstansi));
@@ -159,7 +159,7 @@ public class PegawaiController {
 			
 			model.addAttribute("listPegawai", listPegawai);
 			
-		//filter by instansi, jabatan DONE
+		//filter by instansi, jabatan 
 		} else if (idProvinsi == null && idInstansi != null && idJabatan != null) {
 	
 			InstansiModel instansi = instansiService.getInstansiDetailById(Long.parseLong(idInstansi));

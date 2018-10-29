@@ -8,9 +8,12 @@
 	
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
-		
+		<div style="margin-left:20px">
+		<br>
 		<h2>Data Berhasil Ditambahkan</h2>
 		<p th:text="'Pegawai dengan NIP ' + ${nip} + ' berhasil ditambahkan ke dalam data pegawai.'"></p>
+		<hr>
+		</div>
 	</body>
 
 </html>

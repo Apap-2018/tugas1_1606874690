@@ -9,22 +9,55 @@
 	
 	<body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
+	<br>
+	<h3 style="margin-left:20px" th:text="'Detail Jabatan ' + ${jabatan.nama}"></h3>
+	<hr>
 	
-	<h3 th:text="'Detail Jabatan ' + ${jabatan.nama}"></h3>
-		<p th:text="'Nama: ' + ${jabatan.nama}"></p>
-		<p th:text="'Deskripsi: ' + ${jabatan.deskripsi}"></p>
-		<p th:text="'Gaji Pokok: ' + ${jabatan.gajiPokok}"></p>
-		<p th:text="'Jumlah Pegawai: ' + ${jumlahPegawai}"></p>
-		
-		
-		<form th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="GET">
+	<div style="margin-left:20px">
+	
+	<table class="table table-striped" style="width:50%">
+	  <thead>
+	    <tr>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><b><p th:text="'Nama '"></p></b></td>
+	      <td><p th:text="${jabatan.nama}"></p></td>
+	    </tr>
+	   	<tr>
+	      <td><b><p th:text="'Deskripsi '"></p></b></td>
+	      <td><p th:text="${jabatan.deskripsi}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Gaji Pokok '"></p></b></td>
+	      <td><p th:text="'Rp ' + ${jabatan.gajiPokok}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Jumlah Pegawai: '"></b></p></td>
+	      <td><p th:text="${jumlahPegawai}"></p></td>
+	    </tr>
+	   
+	  </tbody>
+	</table>
+	
+	</div>
+		<hr>
+		<table>
+		<tr>
+		<td>
+		<form style="margin-left:520px" th:action="@{/jabatan/ubah}" th:object="${jabatan}" method="GET">
 			<input type="hidden" th:value="${jabatan.id}" name="idJabatan" /> 
 			<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit">Ubah</button>
 		</form>	
-			
-		<form th:action="@{/jabatan/hapus/} + ${jabatan.id}" th:object="${jabatan}" method="POST">
+		</td>
+		<td>
+		<form  th:action="@{/jabatan/hapus/} + ${jabatan.id}" th:object="${jabatan}" method="POST">
 			<button class="btn btn-danger btn-lg active" role="button" aria-pressed="true" type="submit">Hapus</button>
 		</form>
+		</td>
+		</tr>
+		</table>
 	</body>
 	
 </html>

@@ -8,18 +8,22 @@
 	
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
+		<br>
+		<h3 style="margin-left:20px">Ubah Data Jabatan</h3>
+		<hr>
+		<div style="margin-left:20px">
+		<form th:action="@{/jabatan/ubah}" method="POST">
+			<b>Nama </b><br>
+			<input type="text" name="nama" th:value="${jabatanArchive.nama}"/> <br><br>
+			<b>Deskripsi </b><br>
+			<input type="text" name="deskripsi" th:value="${jabatanArchive.deskripsi}"/> <br><br>
+			<b>Gaji Pokok </b><br>
+			<input type="number" name="gajiPokok" th:value="${jabatanArchive.gajiPokok}"/> <br><br>
 		
-	<h3>Ubah Data Jabatan</h3>	
-	<form th:action="@{/jabatan/ubah}" method="POST">
-		Nama: <br>
-		<input type="text" name="nama" th:value="${jabatanArchive.nama}"/> <br>
-		Deskripsi: <br>
-		<input type="text" name="deskripsi" th:value="${jabatanArchive.deskripsi}"/> <br><br>
-		Gaji Pokok: <br>
-		<input type="number" name="gajiPokok" th:value="${jabatanArchive.gajiPokok}"/> <br><br>
-	
-		<button type="submit">Ubah</button>
-	</form>	
+			<button class="btn btn-primary btn-lg active" role="button"
+			aria-pressed="true" type="submit" style="margin-bottom:20px">Ubah</button>
+		</form>	
+		</div>
 </body>
 
 </html>

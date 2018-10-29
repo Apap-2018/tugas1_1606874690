@@ -9,31 +9,63 @@
 	
 	<body>
 	<nav th:replace="fragments/fragment :: navbar"></nav>
-	
-	<h3 th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h3>
-	<p th:text="'NIP: ' + ${pegawai.nip}"></p>
-	<p th:text="'Nama: ' + ${pegawai.nama}"></p>
-	<p th:text="'Tempat Lahir: ' + ${pegawai.tempatLahir}"></p>
-	<p th:text="'Tanggal Lahir: ' + ${pegawai.tanggalLahir}"></p>
-	<p th:text="'Tahun Masuk: ' + ${pegawai.tahunMasuk}"></p>
-	<p th:text="'Nama Instansi: ' + ${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p>
-	<p th:text="'Gaji: Rp' + ${gaji}"></p>
- 	<table>
- 	<thead>
-			<tr>
-				<th>Jabatan</th>
-			</tr>
-			<tr th:each="jabatan, iterationStatus : *{listJabatan}">
-				<td th:text="${iterationStatus.count}"></td>
-				<td th:text="${jabatan.nama}"></td>
-			</tr> 
-	</table>
 	<br>
-
+	<h3 style="margin-left:20px" th:text="'Lihat Data Pegawai - ' + ${pegawai.nip}"></h3>
+	<hr>
+	<div style="margin-left:20px">
+	
+	<table class="table table-striped" style="width:50%">
+	  <thead>
+	    <tr>
+	      
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr>
+	      <td><b><p th:text="'NIP '"></b></p></td>
+	      <td><p th:text="${pegawai.nip}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Nama '"></b></p></td>
+	      <td><p th:text="${pegawai.nama}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Tempat Lahir '"></b></p></td>
+	      <td><p th:text="${pegawai.tempatLahir}"></p></td>
+	    </tr>
+	   	<tr>
+	      <td><b><p th:text="'Tanggal Lahir '"></b></p></td>
+	      <td><p th:text="${pegawai.tanggalLahir}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Tahun Masuk '"></b></p></td>
+	      <td><p th:text="${pegawai.tahunMasuk}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Nama Instansi '"></b></p></td>
+	      <td><p th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p th:text="'Gaji '"></b></p></td>
+	      <td><p th:text="'Rp ' + ${gaji}"></p></td>
+	    </tr>
+	    <tr>
+	      <td><b><p>Jabatan</b></p></td>
+	      <td>
+			<li th:each="jabatan: *{listJabatan}" th:text="${jabatan.nama}"></li>
+		  </td>		
+	    </tr>
+	  </tbody>
+	</table>
+	
+	</div>
+	<hr>
+	<div style="margin-left:600px; margin-bottom:20px">
 	<form th:action="@{/pegawai/ubah}" th:object="${pegawai}" method="GET">
 		<input type="hidden" th:value="${pegawai.nip}" name="nip" /> 
 		<button class="btn btn-primary btn-lg active" role="button" aria-pressed="true" type="submit">Ubah</button>
 	</form>	
+	</div>
 	</body>
 	
 </html>

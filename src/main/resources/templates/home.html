@@ -9,69 +9,71 @@
 	<body>
 		<nav th:replace="fragments/fragment :: navbar"></nav>
 		
-		<div class="container-fluid">
-			<h2>Sistem Informasi Kepegawaian</h2>
-			<p>Selamat datang di Sistem Informasi Kepegawaian</p>
+		<div class="container-fluid" style="margin-left:10px">
 			<br>
+			<h2>Sistem Informasi Kepegawaian</h2>
+			<p>Selamat Datang di Sistem Informasi Kepegawaian</p>
+			
 		</div>
-		<div class="row">
+		<hr>
+		<div class="row" style="margin-left:10px">
 				<div class="col-md-6">
 				
-					<div class="card">
-						<div class="card-header">
-							Lihat Data Pegawai berdasarkan NIP
+					<div class="card" >
+						<div class="card-header bg-primary">
+						<span style="color: white">	Lihat Data Pegawai berdasarkan NIP </span>
 						</div>
 						<div class="card-body">
 							<form th:action="@{/pegawai}" method="GET">
 								<div class="card-body">
 									<label for="PegawaiNip">Masukkan NIP (Nomor Induk Pegawai):</label>
 									<input type="text" name="nip" class ="form-control"/> <br>
-									<button type="submit" class="btn btn-ptimary">Lihat</button>
+									<button type="submit" class="btn btn-ptimary bg-primary"><span style="color: white">Lihat</span></button>
 								</div>
 							</form>							
 						</div>
 					</div>
-					
+					<br>
 					<div class="card">
-						<div class="card-header">
-							Lihat Detail Jabatan
+						<div class="card-header bg-primary">
+						<span style="color: white">	Lihat Detail Jabatan </span>
 						</div>
 						<div class="card-body">
 							<form th:action="@{/jabatan/view}" method="GET">
 								<div class="card-body">
-									<br>
+									<label>Pilih jabatan yang ingin dilihat</label>
 									<select th:value="${listJabatan}" name = "idJabatan" required="required">
 										<option disabled="disabled" selected="selected" >Pilih Jabatan</option>
 	  									<option th:each="jabatan : ${listJabatan}" th:value="${jabatan.id}" th:text="${jabatan.nama}"> </option>		  
 									</select>
 									<br>
 									<br>
-									<button type="submit" class="btn btn-ptimary">Lihat</button>
+									<button type="submit" class="btn btn-ptimary bg-primary"><span style="color: white">Lihat</span></button>
 								</div>
 							</form>							
 						</div>
 					</div>
-					
+					<br>
 					<div class="card">
-						<div class="card-header">
-							Lihat Pegawai Termuda dan Tertua
+						<div class="card-header bg-primary">
+						<span style="color: white">	Lihat Pegawai Termuda dan Tertua</span>
 						</div>
 						<div class="card-body">
 							<form th:action="@{/pegawai/termuda-tertua}" method="GET">
 								<div class="card-body">
-									<br>
+									<label>Pilih instansi yang ingin dilihat</label>
 									<select th:value="${listInstansi}" name = "idInstansi" required="required">
 										<option disabled="disabled" selected="selected" >Pilih Instansi</option>
 	  									<option th:each="instansi : ${listInstansi}" th:value="${instansi.id}" th:text="${instansi.nama} + ' - ' + ${instansi.provinsi.nama}"> </option>		  
 									</select>
 									<br>
 									<br>
-									<button type="submit" class="btn btn-ptimary">Lihat</button>
+									<button type="submit" class="btn btn-ptimary bg-primary"><span style="color: white">Lihat</span></button>
 								</div>
 							</form>							
 						</div>
 					</div>
-					
+					<br>
 				</div>
 			</div>
 		
